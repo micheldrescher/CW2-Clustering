@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html  xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	 xmlns:h="http://xmlns.jcp.org/jsf/html"
+	 xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:component>
+<h:form>
+
+	<h:commandLink styleClass="menuButton #{menuBean.selection('addScores')}" value="#{msg['menu.scoringButton']}" 
+				   actionListener="#{addScoresBean.newResponse}"
+				   action="#{menuBean.handleClick('addScores')}"/>
+
+	<h:commandLink styleClass="menuButton #{menuBean.selection('Analysis')}" value="#{msg['menu.analysisButton']}" 
+				   action="#{menuBean.handleClick('clusterAnalysis')}"/>
+
+	<h:commandLink styleClass="menuButton #{menuBean.selection('originalData')}" value="#{msg['menu.origDataButton']}" 
+				   action="#{menuBean.handleClick('originalData')}"/>
+
+</h:form>
+</ui:component>
+ 
+ </h:html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html  xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	 xmlns:h="http://xmlns.jcp.org/jsf/html"
+	 xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:component>
+
+	<div id="manage">
+		<h:form>
+
+			<h:commandLink value="#{msg['menu.manageButton']}" 
+				   actionListener="#{manageDataBean.fetchResponses}"
+				   action="#{menuBean.handleClick('manageData')}"/>
+
+			<h:panelGroup rendered="#{loginBean.username ne null}">
+				<h:commandLink value="Logout"
+							   actionListener="#{loginBean.logout()}" 
+							   action="#{menuBean.handleClick('logout')}"/>
+			</h:panelGroup>
+		</h:form>
+	</div>
+
+
+
+
+	<div class="footerText">
+		&copy;2016 - <h:outputText value="#{msg['footer.fundingText']}"/>
+	</div>
+
+	<div id="cwlogo">
+		<h:outputLink value="http://www.cloudwatchhub.eu/" target="_blank">
+			<h:graphicImage library="default" name="images/Clodwatch2_Logo.png"/>
+		</h:outputLink>
+	</div>
+	
+</ui:component>
+</h:html>

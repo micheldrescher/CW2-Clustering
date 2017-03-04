@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/PageTemplate.xhtml">
+
+	<!-- Overwrite the template's page title -->
+	<ui:define name="title">Inspect underlying data</ui:define>
+
+	<ui:define name="content">
+		<!-- One giant table -->
+		<table id="originalData">
+			<!-- title row -->
+			<tr><th class="solutionHeader">Project</th>
+				<ui:repeat value="#{viewDataBean.characteristics}" var="c">
+					<th class="solutionHeader #{c.status}"><h:graphicImage library="img" name="nist13/#{c.name}.png"/></th>
+				</ui:repeat></tr>
+			<!-- data rows -->
+			<ui:repeat var="response" value="#{viewDataBean.responses}">
+				<tr>
+					<td class="projectName">
+						<!-- Project name and Website -->
+						<h:panelGroup rendered="#{response.website ne null}">
+							<a href="#{response.website}" target="_blank">#{response.project}</a> 
+							<h:graphicImage library="img" name="Icon_External_Link.png"/>
+						</h:panelGroup>
+						<!-- Project name only -->
+						<h:panelGroup rendered="#{response.website eq null}">
+							#{response.project}
+						</h:panelGroup>
+					</td>
+					<ui:repeat var="c" value="#{manageDataBean.characteristics}">
+						<td class="projectScore #{c.status}">#{response.getScoreByCharacteristic(c)}</td>
+					</ui:repeat>
+				</tr>
+			</ui:repeat>
+		</table>
+	</ui:define>
+	
+</ui:composition>
+
+</html>

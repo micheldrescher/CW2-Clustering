@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/PageTemplate.xhtml">
+
+	<!-- Overwrite the template's page title -->
+	<ui:define name="title">Manage clustering data</ui:define>
+
+	<ui:define name="content">
+		<div class="allowManagingAllREsponses">
+			<h:form>
+				<h:selectBooleanCheckbox id="allowValidated" value="#{manageDataBean.allowValidated}"/>
+    			<h:outputLabel value="Allow me to manage validate data also." for="allowValidated" />
+				<h:commandButton styleClass="manageButton" value="Submit"
+								 actionListener="#{manageDataBean.fetchResponses}"
+								 action="#{menuBean.handleClick('manageData')}"/>
+			</h:form>
+		</div>
+	
+		<h:panelGroup rendered="#{manageDataBean.hasResponses}">
+			The following responses were not yet validated. Please review these and either validate or delete.
+			<table id="originalData">
+			<h:form>
+				<!-- title row -->
+				<tr>
+					<th class="respondentHeader">When</th>
+					<th class="respondentHeader">Respondent</th>
+					<th class="respondentHeader">Affiliation</th>
+					<th class="solutionHeader">Project</th>
+					<ui:repeat value="#{viewDataBean.characteristics}" var="c">
+						<th class="solutionHeader #{c.status}"><h:graphicImage library="img" name="nist13/#{c.name}.png"/></th>
+					</ui:repeat>
+					<th class="solutionHeader">Validated?</th>
+					<th class="solutionHeader">Actions</th>
+				</tr>
+				
+				<!-- data rows -->
+				<ui:repeat var="response" value="#{manageDataBean.responses}"><tr>
+					<td class="responseTimestamp">
+						<h:outputText value="#{response.modificationDate.time}">
+							<f:convertDateTime type="both" pattern="d MMM yy HH:mm:ss"/>
+						</h:outputText>
+					</td>
+					<td class="respondentName">
+						<a href="mailto:#{response.respondent.email}">#{response.respondent.firstName} #{response.respondent.lastName}</a>
+					</td>
+					<td class="respondentName">#{response.respondent.affiliation}</td>
+					<td class="projectName">
+						<a href="#{response.website}">#{response.project}</a> 
+						<h:graphicImage library="img" name="Icon_External_Link.png"/>
+					</td>
+					<ui:repeat var="c" value="#{manageDataBean.characteristics}">
+						<td class="projectScore #{c.status}">#{response.getScoreByCharacteristic(c)}</td>
+					</ui:repeat>
+					<td class="responseState">#{response.validated}</td>
+					<!-- Actions -->
+					<td>
+						<h:commandButton styleClass="manageButton" value="Validate"
+										 rendered="#{not response.validated}"
+										 actionListener="#{manageDataBean.validateResponse}"
+										 action="manageData">
+							<f:param name="responseID" value="#{response.POID}" />
+						</h:commandButton>
+						<h:commandButton styleClass="manageButton" value="Delete"
+										 actionListener="#{manageDataBean.deleteResponse}"
+										 action="manageData">
+							<f:param name="responseID" value="#{response.POID}" />
+						</h:commandButton>
+					</td>
+				</tr></ui:repeat>
+			</h:form>
+			
+			</table>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{not manageDataBean.hasResponses}">
+			<div class="noResponsesFOund">No unvalidated responses found.</div>
+		</h:panelGroup>		
+	</ui:define>
+</ui:composition>
+
+</html>

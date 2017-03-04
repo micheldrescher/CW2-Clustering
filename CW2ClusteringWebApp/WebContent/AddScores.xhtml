@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/PageTemplate.xhtml">
+
+	<!-- Overwrite the template's page title -->
+	<ui:define name="title">Add your score</ui:define>
+
+	<ui:define name="content">
+	
+		<h:form id="scoreForm">
+			<div id="addScoresIntro">
+				<h:outputText value="#{msg['addScores.instructions']}"/>
+			</div>
+			
+			<div id="respondentForm">
+				<h:panelGrid columns="3">
+					<h:outputText styleClass="label" value="#{msg['content.firstName']}: "/>
+					<h:inputText id="firstNameID" label="First name" required="true" styleClass="inputField" 
+								 requiredMessage="Please enter a first name."
+								 validatorMessage="The first name must be at least 3 characters long."
+					             value="#{addScoresBean.response.respondent.firstName}">
+						<f:validateLength minimum="3" />
+					</h:inputText>
+					<h:message for="firstNameID" errorClass="validationErrorMsg" tooltip="true"/>
+
+					<h:outputText styleClass="label" value="#{msg['content.lastName']}: "/>
+					<h:inputText id="lastNameID" label="Last name" required="true" styleClass="inputField"
+								 requiredMessage="Please enter a last name."
+								 validatorMessage="The last name must be at least 3 characters long."
+					             value="#{addScoresBean.response.respondent.lastName}">
+						<f:validateLength minimum="3" />
+					</h:inputText>					
+					<h:message for="lastNameID" errorClass="validationErrorMsg" tooltip="true"/>
+
+					<h:outputText styleClass="label" value="#{msg['content.affiliation']}: "/>
+					<h:inputText id="affiliationID" label="Affiliation" required="true" styleClass="inputField"
+								 requiredMessage="Please enter an affiliation"
+								 validatorMessage="The affiliation must be at least 3 characters long."
+					             value="#{addScoresBean.response.respondent.affiliation}">
+						<f:validateLength minimum="3" />
+					</h:inputText>
+					<h:message for="affiliationID" errorClass="validationErrorMsg" tooltip="true"/>
+
+					<h:outputText styleClass="label" value="#{msg['content.email']}: "/>
+					<h:inputText id="emailID" label="E-Mail address" required="true" styleClass="inputField"
+								 requiredMessage="Please enter an E-Mail address."
+								 validatorMessage="The E-Mail address appears to be invalid."
+								 value="#{addScoresBean.response.respondent.email}">
+						<f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)" />
+					</h:inputText> 
+					<h:message for="emailID" errorClass="validationErrorMsg" tooltip="true"/>
+					
+					<h:outputText styleClass="label" value="#{msg['content.project']}: "/>
+					<h:inputText id="projectID" label="Project" required="true" styleClass="inputField"
+								 requiredMessage="A project name is required."
+								 validatorMessage="The project name must be at least 3 characters long."
+								 value="#{addScoresBean.response.project}">
+						<f:validateLength minimum="3" />
+					</h:inputText>
+					<h:message for="projectID" errorClass="validationErrorMsg" tooltip="true"/>
+					
+					<h:outputText styleClass="label" value="#{msg['content.website']}: "/>
+					<h:inputText id="websiteID" label="Website" required="true" styleClass="inputField"
+								 requiredMessage="Please enter the project's website."
+								 validatorMessage="The website URL appears to be invalid."
+								 value="#{addScoresBean.response.website}">
+						<f:validateLength minimum="5" />
+						<f:validateRegex pattern="^\s*(http\:\/\/)?([a-z\d\-]{1,63}\.)*[a-z\d\-]{1,255}\.[a-z]{2,6}\s*$" />
+						
+					</h:inputText>
+					<h:message for="websiteID" errorClass="validationErrorMsg" tooltip="true"/>
+				</h:panelGrid>
+			</div>
+
+			<div id="scoringTable">
+				<table>
+					<!-- header rows -->
+					<tr><th class="characteristic" rowspan="2">#{msg['addScores.scoreCategory']}</th>
+						<th style="text-align:left; font-size: smaller;" colspan="4">#{msg['addScores.scoreRangeLow']}</th>
+						<th></th>
+						<th style="text-align:right; font-size: smaller;" colspan="4">#{msg['addScores.scoreRangeHigh']}</th></tr>
+					<tr><th class="scorecolumn">1</th><th class="scorecolumn"> </th><th class="scorecolumn"> </th>
+					    <th class="scorecolumn"> </th><th class="scorecolumn">5</th><th class="scorecolumn"> </th>
+					    <th class="scorecolumn"> </th><th class="scorecolumn"> </th><th class="scorecolumn">9</th></tr>
+					<!-- scoring rows -->
+					<ui:repeat var="score" value="#{addScoresBean.response.scores}">
+						<tr><td class="characteristic"><h:outputText value="#{score.characteristic.fullName}" title="#{score.characteristic.description}"/></td>
+							<td class="scoreRadios" colspan="9">
+								<h:selectOneRadio id="scoreID" style="width: 100%" styleClass="scoreRadiosTable" required="true" 
+									 requiredMessage="Please provide a score."
+									 validatorMessage="The The score value must be between 1 and 9."
+									value="#{score.value}">
+									<f:selectItem itemValue="1" />
+									<f:selectItem itemValue="2" />	   			
+									<f:selectItem itemValue="3" />
+									<f:selectItem itemValue="4" />	   			
+									<f:selectItem itemValue="5" />
+									<f:selectItem itemValue="6" />	   			
+									<f:selectItem itemValue="7" />
+									<f:selectItem itemValue="8" />	   			
+									<f:selectItem itemValue="9" />
+									<f:validateLongRange minimum="1" maximum="9" />
+								</h:selectOneRadio>
+							</td>
+							<td>
+								<h:message for="scoreID" errorClass="validationErrorMsg" tooltip="true"/>
+							</td>
+						</tr>
+					</ui:repeat>
+				</table>
+			</div>
+			
+			<!-- Captcha -->
+			<div class="captchaBox"><div>
+				<span id="captchaDescr">I am a human!</span>
+				<h:graphicImage id="capimg" styleClass="captcha" value="/captcha/Captcha.jpg" /> 
+				<h:inputText id="captchaInput" styleClass="captchaInput" required="true" 
+							 validator="#{addScoresBean.validateCaptcha}"
+							 requiredMessage="Captcha text missing."
+							 value="#{addScoresBean.captchaUserInput}">
+				</h:inputText>
+				<h:message for="captchaInput" errorClass="captchaError validationErrorMsg" tooltip="true"/>
+			</div></div>
+			
+			<div class="contentActionPanel"><div>
+				<h:commandButton styleClass="actionButton" type="reset" value="#{msg['addScores.clearForm']}"/>
+				<h:commandButton styleClass="actionButton" value="#{msg['addScores.submitScores']}"
+								 action="#{menuBean.handleClick('clusterAnalysis')}" actionListener="#{addScoresBean.saveCurrentResponse}"/>
+			</div></div>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+</html>

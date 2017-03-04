@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/PageTemplate.xhtml">
+
+<!-- Overwrite the template's page title -->
+<ui:define name="title">Cluster analysis</ui:define>
+
+<ui:define name="content">
+
+
+
+
+<!-- form to control the clustering parameters -->
+<div class="clusteringForm"><h:form id="analysisFormID">
+	<div style="">
+		<div class="analysisOptions">
+		
+			<f:event type="postValidate" listener="#{analysisBean.validateAnalysisOptions}"/>
+			
+			<span class="title">Analysis options</span>
+			<table>
+				<tr><td style="vertical-align: middle;" class="description">Presets:</td>
+					<td colspan="2">
+						<h:selectOneRadio id="presetsID" value="#{analysisBean.preset}">
+							<f:selectItems value="#{analysisBean.presets}" />
+						</h:selectOneRadio>
+					</td>
+				</tr>
+				<tr>
+					<td class="description">Custom:</td>
+					<td class="customSelectBoxCaption">Essential</td>
+					<td class="customSelectBoxCaption">Common</td>
+				</tr>
+				<tr><td/>
+					<td><h:selectManyListbox id="essentialsID" value="#{analysisBean.essentialSelection}" converter="MyEnumConverter">
+						<f:selectItems value="#{analysisBean.nistFinal}" var="c" itemValue="#{c}" itemLabel="#{c.fullName}"/>
+					</h:selectManyListbox></td>
+					<td><h:selectManyListbox id="commonsID" value="#{analysisBean.commonSelection}" converter="MyEnumConverter">
+						<f:selectItems value="#{analysisBean.nistDraft}"  var="c" itemValue="#{c}" itemLabel="#{c.fullName}"/>
+					</h:selectManyListbox></td>
+				</tr>
+				<tr><td></td>
+					<td style="width: 3em;" colspan="2"><h:message for="analysisFormID" styleClass="noMinimumCharsSelected" tooltip="true"/></td>
+				</tr>
+				<tr><td></td>
+					<td style="width: 3em;" colspan="2" class="customSelectBoxCaption">NOTE: The "Custom" preset requires selecting AT LEAST TWO essential or common characteristics.</td>
+				</tr>
+				<tr>
+					<td colspan="3" style="text-align: left;">
+						<h:selectBooleanCheckbox value="#{analysisBean.includeUnvalidated}"/> 
+						Include also unvalidated responses in analysis 
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" style="text-align: left;">
+						<h:selectBooleanCheckbox value="#{analysisBean.overrideThreshold}"
+							onclick="document.getElementById('analysisFormID:customThresholdID').disabled = !this.checked"/> 
+						Use a custom significance threshold of 
+						<h:inputText id="customThresholdID" required="false" value="#{analysisBean.customThreshold}" size="3"
+							disabled="#{analysisBean.overrideThreshold eq false}"
+							validatorMessage="Custom threshold value must be at least 0.01.">
+							<f:validateDoubleRange minimum="0.01"/>
+						</h:inputText>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" style="text-align: left;">
+						<h:selectBooleanCheckbox value="#{analysisBean.projectScores}"/>
+						Project scores onto significant characteristics 
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: left;">
+						<h:selectBooleanCheckbox value="#{analysisBean.showPCAResults}"/> Display analysis details 
+					</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="clusteringOptions">
+			<span class="title">Clustering options</span>
+			<table>
+				<tr>
+					<td>
+						<h:outputLabel for="maxDistanceID" value="Max. cluster distance:"/>
+					</td>
+					<td>
+						<h:inputText id="maxDistanceID" required="true"
+									 requiredMessage="Please anter a value"
+									 validatorMessage="Max distance must be at least 0.01"
+									 value="#{analysisBean.minDistance}"
+									 size="5"
+									 title="Decimal values greater than 0.0">
+							<f:validateDoubleRange minimum="0.01"/>
+						</h:inputText>
+					</td>
+				</tr>
+				<tr><td colspan="2"><h:message for="maxDistanceID" errorClass="validationErrorMsg" tooltip="true"/></td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<div style="float: right; width: 100%;">
+		<div class="actionButtons">
+				<h:commandButton styleClass="actionButton" type="reset" value="clear"/>
+				<h:commandButton styleClass="actionButton" value="Analyse"
+								 action="#{menuBean.handleClick('performAnalysis')}"
+								 actionListener="#{analysisBean.performAnalysis}"/>
+		</div>
+	</div>				
+</h:form></div>
+		
+<!-- Show the PCA only when it was requested -->
+   <h:panelGroup styleClass="analysis" rendered="#{analysisBean.showPCA}">
+  		<h:outputText styleClass="analysisTitle" value="Principal Component Analysis"/>
+
+	<!-- Show some statistics in a simple table -->
+	<table class="analysisStats">
+		<tr><td class="statsLabel">Included responses:</td>
+		    <td class="statsValue"><h:outputLabel value="#{analysisBean.numResponses}"/></td></tr>
+		<tr><td class="statsLabel">Significant characteristics:</td>
+		    <td class="statsValue"><h:outputLabel value="#{analysisBean.numSignificantEigenvalues}"/></td></tr>
+		<tr><td class="statsLabel">Data coverage:</td>
+		    <td class="statsValue"><h:outputLabel value="#{analysisBean.eigenValueCoverage}"><f:convertNumber pattern="#0.00"/></h:outputLabel>%</td></tr>
+	</table>
+
+	<!-- display the eigenvalue bar chart -->
+  		<div class="eigenvalueChart">
+   		<h:graphicImage value="#{analysisBean.chartData}"/>
+   	</div>
+</h:panelGroup>
+
+<!-- Show the Clustering only when it was requested, and the PCA yields a result -->
+   <h:panelGroup styleClass="clustering" rendered="#{analysisBean.showClustering}"><div>
+  		<h:outputText styleClass="clusteringTitle" value="Clustering"/>
+	<!-- And now, ladies and gents, the clusters! -->
+	<ui:repeat var="solution" value="#{analysisBean.solutions}">
+		<ui:include src="WEB-INF/includes/ClusterSolution.xhtml">
+			<ui:param name="model" value="#{solution}"/>
+		</ui:include>
+	</ui:repeat>
+</div></h:panelGroup>
+
+<!-- Show error message if the PCA eigenvalue checks fail -->		   	
+<h:panelGroup styleClass="analysisError" rendered="#{analysisBean.showPCAError}">
+  		<h:outputText styleClass="pcaEVCheckFailed" value="PCA analysis failed to render proejcted scores"/>
+</h:panelGroup>
+
+
+
+
+</ui:define>
+</ui:composition>
+
+</html>

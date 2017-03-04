@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html  xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	 xmlns:h="http://xmlns.jcp.org/jsf/html"
+	 xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:component>
+
+	<div id="privacyPolicy">
+		<h:link outcome="privacy">Privacy policy</h:link>
+	</div>
+
+	<div id="appTitle">
+		<h:form>
+			<h:commandLink action="#{menuBean.handleClick('home')}"><h:outputText styleClass="appTitleText" value="#{msg['header.appName']}"/></h:commandLink>
+			<h:commandLink action="#{menuBean.handleClick('changelog')}"><h:outputText styleClass="appTitleBeta" value="#{msg['header.appName.version']}"/></h:commandLink>
+		</h:form>
+	</div>
+
+	<div id="logos">
+		<h:outputLink value="http://www.oerc.ox.ac.uk/" target="_blank">
+			<h:graphicImage library="default" name="images/newoerc_logo.jpg"/>
+			<h:graphicImage library="default" name="images/university_of_oxford.png"/>
+		</h:outputLink>
+ 	</div>
+ </ui:component>
+
+</h:html>

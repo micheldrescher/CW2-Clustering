@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/PageTemplate.xhtml">
+
+<!-- Overwrite the template's page title -->
+<ui:define name="title">Cloud landscape clustering</ui:define>
+
+<ui:define name="content">
+
+<div class="about">
+	<p>About the Cloud landscape clustering tool:</p>
+	<p>The CloudWATCH project, partially funded through the EC FP7 (Contract No. 610994), ran from September 2013 to 
+		October 2015. It developed a clustering methodology in order to gain insight in commonalities of European cloud 
+		computing projects across the entire Cloud computing landscape.	The objective of this empirical analysis is to 
+		discover distinct groups of projects that are consistent in their relationship to a set of well-defined 
+		characteristics. The seed dataset for this analysis was compiled by CloudWATCH representing 38 European projects 
+		and	scored against the full set of 13 NIST defining	characteristics on an interval scale.</p>
+	<p>This online application builds upon this manual clustering work, offering an interactive extension to this
+		initial manual clustering analysis. This web application provides the following functionality:</p>
+	<ol>
+		<li><b>View base data.</b><br/>
+			Inspect the original scoring data as provided as part of the seed dataset, or subsequently added by other users
+			and validated by CloudWATCH2 representatives.</li>
+		<li><b>Cluster analysis</b><br/>
+			Perform interactive cluster analysis in order to gain individual insight. Select one of the preset NIST cloud 
+			computing characteristics, or configure an individual set of characteristics. Set a maximum cluster distance
+			to control the size and focus of computed clusters.</li>
+		<li><b>Add your scores.</b><br/>
+			Enter your individual activity or project's scores to have it included in the extended base dataset. <em>Note:</em>
+			Before your scores will be included in any cluster analysis, CloudWATCH2 representatives will need to validate
+			the data to prevent tainting the base data set and degradation of the analysis quality.</li>
+		<li><b>Manage data.</b><br/>
+			This functionality is restricted to named CloudWATCH representatives empowered to access the provided data, and
+			validate the entered scores.</li>
+	</ol>
+</div>
+
+</ui:define>
+
+</ui:composition>
+
+</html>

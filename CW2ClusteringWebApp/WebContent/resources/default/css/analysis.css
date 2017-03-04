@@ -1,0 +1,209 @@
+@CHARSET "UTF-8";
+
+/**********************************/
+/** CLUSTERING INPUT DATA styles **/
+/**********************************/
+.clusteringForm {
+    display: flex;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    min-height: 1px;
+    position: relative;
+
+}
+
+.description {
+	
+	font-size: 20px;
+}
+.analysisOptions {
+	float: left;
+	padding-right: 0.5em;
+}
+
+.noMinimumCharsSelected {
+	font-size: smaller;
+	font-style: italic;
+	color: red;
+}
+
+.customSelectBoxCaption {
+	font-size: smaller;
+	font-style: italic;
+	font-size: 20px;
+}
+
+.clusteringOptions {
+	float: right;
+	padding-left: 0.5em;
+	padding-bottom: 0.5em;
+}
+.actionButtons {
+	text-align: center;
+}
+.actionButton {
+	padding: 10px;
+	margin: 10px;
+	border: 3px solid #002147;
+	background-color: #ffffff;
+	color: #002147;
+	font-size: 18px;
+
+	
+}
+
+.actionButton:hover {
+	border-radius: 8px; 
+	background-color: #899eb6;
+	color: #ffffff;
+	
+}
+
+.analysisOptions .title,
+.clusteringOptions .title {
+	display: block;
+	font-size: large;
+	text-align: center;
+	width: 100%;
+	padding-bottom: 0.25em;
+	background-color: #F1F1F1;
+}
+
+.analysisOptions table td {
+	text-align: center;
+	vertical-align: top;
+}
+
+.analysisOptions table table td {
+	text-align: center;
+	vertical-align: top;
+}
+
+.analysisOptions td:first-of-type {
+	padding-right: 0.2em;
+	text-align: left;
+}
+
+/*****************************************/
+/** PRINCIPLE COMPONENT ANALYSIS styles **/
+/*****************************************/
+.analysis {
+	display: block;
+	width: 45%;
+	padding: 1em;
+	float: left;
+ 	height: 13.5em;
+}
+
+.analysisTitle {
+	display: block;
+	text-align: center;
+	width: 100%;
+	margin: auto;
+	font-size: xx-large;
+	padding-bottom: 1em;
+	
+}
+
+.analysisStats {
+	float: left;
+}
+
+.eigenvalueChart {
+	float: right;
+}
+
+.eigenvalueChart img {
+	width: 320px;
+	height: 150px;
+}
+
+/***********************/
+/** CLUSTERING styles **/
+/***********************/
+.clustering {
+	display: block;
+	width: 100%;
+	float: left;
+	margin-top: 2em;
+
+}
+
+.clusteringTitle {
+	display: block;
+	text-align: center;
+	width: 100%;
+	color: #ffffff;
+	padding-top: 30px;
+	font-size: 30px;
+	background-color: #3f5c91;
+	height: 80px;
+}
+
+.clustering table {
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
+tbody .clusterSpacer {
+	height: 1em;
+}
+
+.clusterName {
+	font-weight: bold;
+	vertical-align: bottom;
+	padding-right: 2em;
+	font-size: 25px;
+	
+}
+
+.clusterCharacteristic {
+	font-size: 9pt;
+	width: 80px;
+	text-align: center;
+	vertical-align: bottom;
+}
+
+.clusterCharacteristic.FINAL {
+	font-weight: bold;
+}
+
+/*tbody.clusterProjects {
+	border: 1px solid  #bcbcbc;
+}*/
+
+
+.clustering .projectName {
+	font-weight: normal;
+}
+
+.clustering .projectScore {
+	text-align: center;
+}
+
+tbody.clusterStats {
+	text-align: center;
+	font-style: italic;
+	font-size: small;
+}
+
+.clustering .statName {
+	text-align: left;
+	font-weight: normal;
+	font-style: italic;
+
+}
+
+
+/*
+.clustering .projectScore:nth-of-type(6) {
+	border-right: 1px dotted black;
+}
+
+.clustering .statValue:nth-of-type(6) {
+	border-right: 1px dotted black;
+}
+*/

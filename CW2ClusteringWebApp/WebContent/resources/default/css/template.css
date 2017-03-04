@@ -1,0 +1,229 @@
+@CHARSET "UTF-8";
+
+
+/*********************/
+/*    HEADER AREA    */
+/*********************/
+
+/* Header area layout */
+#header {
+	z-index: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #002147;
+	width:100%;
+	height: 4.5em;
+}
+body {
+	font-family: Helvetica;
+	line-height: 1.428571429;
+	margin: 0;
+}
+
+    
+h1 {
+	font-family: Helvetica;
+	text-transform: uppercase;
+	
+}
+h2, h3 {
+	font-family: Helvetica;
+	text-transform:  capitalize;
+	
+}
+
+/* Privacy Policy div */
+#privacyPolicy {
+	float: left;
+	position: absolute;
+  	bottom: 0;
+  	left: 0;
+	text-align: left;
+	padding: 0.25em;
+}
+
+#privacyPolicy a {
+	display: block;
+	text-decoration: none;
+	color: #ffffff;
+}
+
+/* Formatting the area of the web application title. Takes 75% of the header bar */
+#appTitle {
+	width: 75%;
+	font-family: "Raleway",sans-serif;	
+	text-transform: capitalize;
+	margin: auto;
+	z-index: 2;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+	text-align: center;
+	font-size:2em;
+	
+	
+}
+
+.appTitleBeta {
+color: white;
+	padding-left: 0.25em;
+}
+
+#appTitle a {
+	text-decoration: none;
+	color: #FFFFFF;
+	
+}
+
+
+/* Formatting the logo area, making sure it floats right of the title area using a quarter of the available header bar */
+#logos {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	display: inline-flex;
+}
+
+#logos a {
+	display: block;
+}
+
+/* Scaling the logos down to pleasurable size */
+#logos img {
+    height: 3em;
+    margin-right: 0.5em;
+    margin-top: 0.6em;
+}
+
+/**********************/
+/*      MENU BAR      */
+/**********************/
+/* content area area layout */
+#menubar {
+	background-color: rgba(59, 94, 134, 0.6);
+    display: block;
+    height: 84px;
+
+    margin-top: 72px;
+    text-align: center;
+    width: 100%;
+}
+
+.menuButton {
+	display: inline-table;
+	top:0;
+	color: white;
+	padding: 10px 10px 10px 10px;
+	margin: 0 5px;
+	text-decoration: none;
+
+	margin-top: 20px;
+}
+
+#scoreForm {
+	background-color: #3f5c91;
+}
+
+#j_idt31{
+	width: 100%;
+}
+
+.menuButton.selected {
+	background-color: #002147;
+	color: #ffffff;	
+}
+
+.menuButton:HOVER {
+	background-color: #002147;
+	color: #ffffff;
+	text-decoration: none;
+	border-radius: 8px;
+}
+
+
+/*********************/
+/*    FOOTER AREA    */
+/*********************/
+
+/* Footer area layout */
+#footer {
+	display: block;
+	position: absolute;
+	left: 0;
+	background-color: #002147;
+	width:100%;
+	height: 1.8em;
+	color: white;
+}
+
+#manage {
+	display: block;
+	float: left;
+	position: absolute;
+	left: 0;
+	top: 50%;
+  	transform: translateY(-50%);
+	padding: 0.25em;
+	color: #ffffff;
+}
+
+#manage a {
+	text-decoration: none;
+	padding: 0.25em;
+	color: #002D5F;
+}
+
+.footerText {
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+	text-align: center;
+	font-size:0.8em;
+	width: 75%;
+	margin: auto;
+}
+
+#cwlogo {
+	height: 1.8em;
+}
+
+#cwlogo img {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 1.8em;
+	background-color: white;
+}
+
+/********************************************/
+/*  COMMON CONTENT STYLES ACROSS ALL PAGES  */
+/********************************************/
+
+/* content area area layout */
+#content {
+	display: block;
+
+	width:100%;
+	
+	min-height: 500px;
+	overflow: hidden;
+}
+#analysisFormID {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@media (max-width: 785px) {
+
+#appTitle {
+	font-size: 1em;
+	text-align: left;
+
+}
+#privacyPolicy {
+    font-size: 0.8em;
+}
+#logos img {
+    height: 1.7em;}
+}

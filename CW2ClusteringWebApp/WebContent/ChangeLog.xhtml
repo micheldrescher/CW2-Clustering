@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/PageTemplate.xhtml">
+
+<!-- Overwrite the template's page title -->
+<ui:define name="title">Cloud landscape clustering</ui:define>
+
+<ui:define name="content">
+
+<div id="changelog">
+
+	<p class="title">Change Log</p>
+
+	<p class="version"></p>	
+	<ul id="new">
+	</ul>
+	<ul id="improved">
+	</ul>
+	<ul id="bugfix">
+	</ul>
+
+	<p class="version">1.5 - 5 July 2016</p>	
+	<ul id="new">
+	</ul>
+	<ul id="improved">
+		<li>Complete UI redesign using the CloudWATCH 2 design guidelines.</li>
+	</ul>
+	<ul id="bugfix">
+	</ul>
+
+	<p class="version">1.4.1 - 15 April 2016</p>	
+	<ul id="new">
+	</ul>
+	<ul id="improved">
+		<li>Improvements in the data management section for better distinguishing submissions.</li>
+	</ul>
+	<ul id="bugfix">
+	</ul>
+
+	<p class="version">1.4 - 8 April 2016</p>	
+	<ul id="new">
+		<li><b>Functionality - Include unvalidated responses</b><br/>
+			Added an option allowing users to also include unvalidated submissions in their analyses. 
+			This allows users to perform analyses straight away seeing where their activity sits, at the 
+			risk of the analysis being tainted by illegitimate, silly submissions that haven't been weeded out yet.
+			Since the use of the application is entirely anonymous, we cannot distinguish which submissions 
+			originated from which of the current users to filter out all other, unrelated unvalidated submissions.</li>
+		<li><b>Functionality - Allow custom significance thresholds</b><br/>
+			By default, the application uses the Kaiser-Guttman criterion (i.e. a value of 1.0) to determine 
+			which and how many of the selected characteristics should be considered significant for further 
+			analysis. Some <h:outputLink target="_blank" value="https://en.wikipedia.org/wiki/Factor_analysis#Older_methods">criticism</h:outputLink>
+			argues that the Kaiser-Guttman criterion is not always applicable. We thus allow users to decide for
+			themselves which threshold should be applied. The default threshold remains Kaiser-Guttman.</li>
+		<li><b>Functionality - Allow option to skip projecting project scores onto significant characteristics</b><br/>
+			Projecting scores onto the significant dimensions (i.e. characteristics) emphasises the variance of responses
+			related to these dimensions, but dampens the variance among the non-significant dimensions. If a user's
+			activity happens to be scored high in non-significant characteristics, it might be misrepresented in the
+			follow-on clustering phase. Not projecting scores onto significant characteristics eliminates this underrepresentation
+			at the risk of a much more scattered clustering result.</li>
+	</ul>
+	<ul id="improved">
+	</ul>
+	<ul id="bugfix">
+		<li>UI - Fixed clickable link area for management links</li>
+	</ul>
+
+	<p class="version">1.3 - 6 Apr 2016</p>	
+	<ul id="new">
+		<li>Policy - Prominent clarification that the tool is still in beta.</li>
+		<li>Policy - Added proper change log to the application. Can be reached via new version indication in each pages header.</li>
+	</ul>
+	<ul id="improved">
+		<li>UI - Reordered user interaction buttons for better usability</li>
+		<li>UI - Demoted "Manage data" and "Logout" buttons from user interaction buttons to subtle links in the left corner of the footer.</li>
+	</ul>
+	<ul id="bugfix">
+		<li>UI - Fixed clickable link area for OeRC and UOXF logos</li>
+	</ul>
+
+	<p class="version">1.2.1 - 29 Mar 2016</p>	
+	<ul id="new">
+	</ul>
+	<ul id="improved">
+		<li>L&amp;F - Added clickable CloudWATCH logo leading to <h:outputLink target="_blank" value="http://cloudwatchhub.eu">CloudWatch Hub website</h:outputLink>.</li>
+		<li>L&amp;F - Turned logos for OeRC and University of Oxford into clickable links <h:outputLink target="_blank" value="http://www.oerc.ox.ac.uk/">OeRC website</h:outputLink>.</li>
+	</ul>
+	<ul id="bugfix">
+	</ul>
+
+	<p class="version">1.2 - 23 Mar 2016</p>	
+	<ul id="new">
+	</ul>
+	<ul id="improved">
+		<li>Policy - Updated privacy policy. Latest version available <h:link outcome="privacy">here</h:link>.</li>
+	</ul>
+	<ul id="bugfix">
+	</ul>
+
+	<p class="version">1.1 - 8 Mar 2016</p>	
+	<ul id="new">
+		<li>Functionality - Interactive cluster analysis now allows selecting characteristics in three presets 
+			(All, Essential, Common) and free selection.</li>
+	</ul>
+	<ul id="improved">
+		<li>Policy - Updated privacy policy. Latest version available <h:link outcome="privacy">here</h:link>.</li>
+	</ul>
+	<ul id="bugfix">
+	</ul>
+
+	<p class="version">1.0 - 7 Mar 2016</p>	
+	<ul id="new">
+		<li>Functionality - First public release of the Cloud landscape clustering tool. Version numbering continues normally, 
+			but the tool remains in beta state for the time being.</li>
+	</ul>
+	<ul id="improved">
+	</ul>
+	<ul id="bugfix">
+	</ul>
+
+</div>
+
+</ui:define>
+
+</ui:composition>
+
+</html>

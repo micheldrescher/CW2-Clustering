@@ -1,0 +1,51 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<!-- A SolutionModel as an input parameter -->
+	<!-- It has been passed in as "model" -->
+	<table>
+	
+		<!-- cluster -->
+		<ui:repeat var="cluster" value="#{model.clusters}">
+		
+			<!-- title & characeristics -->
+			<tbody class="clusterHeader">
+				<tr><td colspan="#{cluster.numSelectedCharacteristics+1}" class="clusterSpacer"/></tr>
+				<tr><td class="clusterName">#{cluster.name}</td>
+					<ui:repeat value="#{cluster.selectedCharacteristics}" var="c">
+						<td class="clusterCharacteristic #{c.status}">#{c.fullName}</td>
+					</ui:repeat>
+				</tr>
+			</tbody>
+
+			<!-- the projects in a cluster -->
+			<tbody class="clusterProjects">
+				<ui:repeat var="project" value="#{cluster.members}">
+					<tr><td class="projectName">#{project.name}</td>
+						<ui:repeat var="score" value="#{project.scores}"> 
+							<td style="#{score.colour}" class="projectScore #{score.status}">
+								<h:outputText value="#{score.value}"><f:convertNumber pattern="#0.0000"/></h:outputText>
+							</td>
+						</ui:repeat></tr>
+				</ui:repeat>
+			</tbody>
+
+			<!-- statistics for each cluster -->					
+			<tbody class="clusterStats">
+				<ui:repeat var="stat" value="#{cluster.stats}">
+					<tr><td class="statName">#{stat.name}</td>
+						<ui:repeat var="score" value="#{stat.scores}"> 
+							<td style="#{score.colour}" class="statValue #{score.status}">
+								<h:outputText value="#{score.value}"><f:convertNumber pattern="#0.0000"/></h:outputText>
+							</td>
+						</ui:repeat></tr>
+				</ui:repeat>
+			</tbody>
+
+		</ui:repeat>
+ 	</table>
+
+</ui:composition>

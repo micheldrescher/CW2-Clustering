@@ -1,0 +1,89 @@
+@CHARSET "UTF-8";
+
+/* centred table, centred text, and only one border for the whole table. */
+table#originalData {
+	margin: auto;
+	text-align: center;
+
+}
+
+/* hover the data rows */
+table#originalData  tr:hover {
+	background-color: #f5f5f5;
+}
+body {
+	font-family: "Raleway",sans-serif;
+}
+
+
+/* but no hover over the title row */
+table#originalData  tr:first-of-type:hover {
+	background-color: #FFFFFF;
+}
+
+/* solution headers are aligned bottom left (Project, website) */
+.solutionHeader {
+	text-align: left;
+	vertical-align: bottom;
+
+	font-weight: bold;
+	font-family: inherit; 
+	font-size: 30px;
+	
+	line-height: 1.45; 
+	color: #528ce0; 
+	vertical-align:  inherit; 
+	padding: 10px; 
+}
+
+
+/* solution header images denote the score colums.
+   they are centred with some left-right padding to define the 
+   column width */
+.solutionHeader img {
+	display: block;
+	padding: 5px;
+}
+.solutionHeader img:hover {
+	background-color: #7e7e7e;
+}
+
+.projectName, projectWebsite {
+	text-align: left;
+	font-weight: bold;
+	font-weight: bold;
+	font-family: inherit; font-size: .875em; 
+	text-decoration: none;
+	line-height: 1.45; 
+	color: #528ce0; 
+	vertical-align: middle; 
+	padding: 10px; 
+}
+
+/* thin vertical solid line after website */
+.solutionHeader:first-of-type {
+	border-right: 1px solid #528ce0;
+}
+
+/* visually separate FINAL from DRAFT characteristics - both header and scores */
+.FINAL + :not(.FINAL) {
+    border-left: 1px dotted black;
+}
+
+/* FINAL characteristics get a grey background *different* from :hover! */
+.projectName {
+
+	padding: 10px;
+	border-bottom: 1px solid #969696;
+
+}
+
+.projectName a {
+	text-decoration: none;
+	padding-right: 0.1em;
+	color: #528ce0;
+}
+
+.projectName a:visited {
+	color: black;
+}
